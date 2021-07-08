@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
-import styled, { css } from 'styled-components';
+import React, { useEffect, useState } from 'react';
+import styled, { css } from 'styled-components/macro';
 import { DateToString } from 'Helpers/DateToString';
 
-import { Heading1, Heading2, Heading3 } from 'Components/UI/Text/Heading';
+import { Heading3 } from 'Components/UI/Text/Heading';
 import { Paragraph } from 'Components/UI/Text/Paragraph';
-import Search from 'Components/UI/Button/Search';
+import Search from 'Components/Seatch/Search';
+import { ICity } from 'App';
+import API from 'Helpers/API';
 
 const Wrapper = styled.div`
   display: flex;
@@ -33,52 +35,43 @@ const TextWrapper = styled.div<TextWrapperProps>`
 
 const GPSLocation = styled.div``;
 
-interface LocationProps {
-  currentCity: string;
-  countryIso2: string;
-  setCurrentCity: React.Dispatch<React.SetStateAction<string>>;
+interface ILocationProps {
+  currentCity: ICity;
+  setCurrentCity: React.Dispatch<React.SetStateAction<ICity>>;
 }
 
-const Location: React.FC<LocationProps> = ({
+const Location: React.FC<ILocationProps> = ({
   currentCity,
   setCurrentCity,
-  countryIso2
 }) => {
   const [showInput, setSowInpt] = useState(false);
-  const [userGeo, setUserGeo] = useState<{
-    lat: null | number;
-    long: null | number;
-  }>({ lat: null, long: null });
+  const [showGeoList, setShowGeoList] = useState<boolean>(false);
+
   const handleShowInput = (value: boolean) => {
     setSowInpt(value);
+    setShowGeoList(false);
   };
-
-  const handleSetUserGeo = () => {
-    // setUserGeo()
-    navigator.geolocation.getCurrentPosition((position) => {
-      setUserGeo({
-        lat: position.coords.latitude,
-        long: position.coords.longitude
-      });
-    });
+  const handleShowGeoList = (value: boolean) => {
+    setShowGeoList(value);
+    setSowInpt(false);
   };
 
   return (
     <Wrapper>
-      {console.log(userGeo)}
       <TextWrapper onClick={() => handleShowInput(true)} showInput={showInput}>
         <Heading3 elipsis={true}>
-          {currentCity}, {countryIso2}
+          {currentCity.name}, {currentCity.country}
         </Heading3>
         <Paragraph>{DateToString(new Date())}</Paragraph>
       </TextWrapper>
       <Search
         showInput={showInput}
-        setSowInpt={setSowInpt}
-        inputValue={currentCity}
-        setCurrentCity={setCurrentCity}
         handleShowInput={handleShowInput}
-        handleSetUserGeo={handleSetUserGeo}
+        setSowInpt={setSowInpt}
+        inputValue={currentCity.name}
+        setCurrentCity={setCurrentCity}
+        showGeoList={showGeoList}
+        handleShowGeoList={handleShowGeoList}
       />
     </Wrapper>
   );

@@ -1,4 +1,4 @@
-import { createGlobalStyle } from 'styled-components';
+import { createGlobalStyle } from 'styled-components/macro';
 
 const GlobalStyle = createGlobalStyle`
 
@@ -48,8 +48,6 @@ input[type=number] {
 a, img, div{
   -webkit-tap-highlight-color: transparent;
 }
-
-`
-
+`;
 
 export default GlobalStyle;

@@ -1,18 +1,25 @@
-// {
-//   "root": true,
-//   "parser": "@typescript-eslint/parser",
-//   "plugins": [
-//     "@typescript-eslint",
-//     "prettier"
-//   ],
-//   "extends": [
-//     "eslint:recommended",
-//     "plugin:@typescript-eslint/eslint-recommended",
-//     "plugin:@typescript-eslint/recommended",
-//     "prettier"
-//   ],
-//   "rules": {
-//     "no-console": 1,       // Means warning
-//     "prettier/prettier": 2 // Means error
-//   }
-// }
+{
+  "root": true,
+  "parser": "@typescript-eslint/parser",
+  "plugins": [
+    "@typescript-eslint",
+    "prettier"
+  ],
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended",
+    "prettier"
+  ],
+  "rules": {
+    "no-console": 1,       // Means warning
+    // "prettier/prettier": 2, // Means error
+    "prettier/prettier": ["error", {"endOfLine": "auto"}],
+    "@typescript-eslint/no-implicit-any-catch": "warn"
+  },
+  "settings":  {
+    "react":  {
+      "version":  "detect"  // Tells eslint-plugin-react to automatically detect the version of React to use
+    }
+  }
+}
