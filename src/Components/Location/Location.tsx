@@ -14,11 +14,11 @@ const Wrapper = styled.div`
   position: relative;
 `;
 
-interface TextWrapperProps {
+interface ITextWrapperProps {
   showInput: boolean;
 }
 
-const TextWrapper = styled.div<TextWrapperProps>`
+const TextWrapper = styled.div<ITextWrapperProps>`
   /* white-space: nowrap;
   text-overflow: ellipsis;
   display: block;
@@ -60,7 +60,9 @@ const Location: React.FC<ILocationProps> = ({
     <Wrapper>
       <TextWrapper onClick={() => handleShowInput(true)} showInput={showInput}>
         <Heading3 elipsis={true}>
-          {currentCity.name}, {currentCity.country}
+          {/* {currentCity.name}, {currentCity.country} */}
+          {currentCity.name}
+          {currentCity.country !== '' ? `, ${currentCity.country}` : null}
         </Heading3>
         <Paragraph>{DateToString(new Date())}</Paragraph>
       </TextWrapper>

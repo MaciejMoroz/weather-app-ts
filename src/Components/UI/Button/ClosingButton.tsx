@@ -28,11 +28,11 @@ const X = styled.div`
   }
 `;
 
-interface ClosingButtonProps {
+interface IClosingButtonProps {
   handleClick: () => void;
 }
 
-const ClosingButton: React.FC<ClosingButtonProps> = ({ handleClick }) => {
+const ClosingButton: React.FC<IClosingButtonProps> = ({ handleClick }) => {
   return (
     <Button onClick={() => handleClick()}>
       <XWrapper>

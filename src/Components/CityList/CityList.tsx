@@ -10,6 +10,7 @@ const Wrapper = styled.div<{ showGeoList: boolean }>`
   height: 100%;
   position: relative;
   padding: ${({ theme }) => theme.space.base};
+  top: 8px;
   ${({ showGeoList }) =>
     showGeoList &&
     css`
@@ -33,7 +34,7 @@ const LoaderWrapper = styled.div`
   justify-content: center;
 `;
 
-interface CityListProps {
+interface ICityListProps {
   errorMsg: string | null;
   isLoading: boolean;
   cityList: ICity[];
@@ -41,7 +42,7 @@ interface CityListProps {
   showGeoList?: boolean;
 }
 
-const CityList: React.FC<CityListProps> = ({
+const CityList: React.FC<ICityListProps> = ({
   errorMsg,
   isLoading,
   cityList,

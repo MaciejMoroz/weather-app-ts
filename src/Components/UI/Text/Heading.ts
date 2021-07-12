@@ -29,11 +29,11 @@ export const Heading2 = styled.h2`
 `;
 
 // h3
-interface Heading3Proops {
+interface IHeading3Proops {
   elipsis?: boolean;
 }
 
-export const Heading3 = styled.h3<Heading3Proops>`
+export const Heading3 = styled.h3<IHeading3Proops>`
   ${({ elipsis }) =>
     elipsis &&
     css`

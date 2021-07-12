@@ -135,12 +135,12 @@ const rightToCenter = keyframes`
     }
 `;
 
-interface SlidingCircleProps {
+interface ISlidingCircleProps {
   bgColor: string;
   position: string;
 }
 
-const SlidingCircle = styled(MainCircle)<SlidingCircleProps>`
+const SlidingCircle = styled(MainCircle)<ISlidingCircleProps>`
   border: 0;
   position: absolute;
   background: ${({ bgColor }) => bgColor};

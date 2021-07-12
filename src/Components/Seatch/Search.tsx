@@ -7,14 +7,44 @@ import { ICity } from 'App';
 import ClosingButton from 'Components/UI/Button/ClosingButton';
 import CitiList from 'Components/CityList/CityList';
 
+interface IButtonProps {
+  showInput: boolean | null;
+}
+
+interface ISearchProps {
+  setSowInpt: React.Dispatch<React.SetStateAction<boolean>>;
+  inputValue: string;
+  setCurrentCity: React.Dispatch<React.SetStateAction<ICity>>;
+  showInput: boolean;
+  handleShowInput: (value: boolean) => void;
+  handleShowGeoList: (value: boolean) => void;
+  showGeoList: boolean;
+}
+
+interface ISearchBoxFormProps {
+  showInput: boolean;
+}
+
 const Wrapper = styled.div`
   position: absolute;
   width: 100%;
 `;
-interface ButtonProps {
-  showInput: boolean | null;
-}
-const Button = styled.button<ButtonProps>`
+
+const SearchBoxForm = styled.div<ISearchBoxFormProps>`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  display: ${({ showInput }) => (showInput ? 'flex' : 'none')};
+`;
+
+const ButtonWrapper = styled.div`
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: flex;
+`;
+
+const Button = styled.button<IButtonProps>`
   display: block;
   ${({ showInput }) =>
     showInput &&
@@ -60,7 +90,8 @@ const StyledInput = styled.input`
   }
 `;
 
-const useOutsideAlerter = (
+const useOutsideClick = (
+  // TODO jaki typ dla referencji
   ref: any,
   showInput: boolean,
   handleClose: () => void
@@ -78,39 +109,7 @@ const useOutsideAlerter = (
   }, [ref, showInput]);
 };
 
-interface SearchBoxFormProps {
-  showInput: boolean;
-}
-const SearchBoxForm = styled.div<SearchBoxFormProps>`
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  display: ${({ showInput }) => (showInput ? 'flex' : 'none')};
-`;
-
-const ButtonWrapper = styled.div`
-  position: absolute;
-  top: 0;
-  right: 0;
-  display: flex;
-`;
-
-interface SearchProps {
-  setSowInpt: React.Dispatch<React.SetStateAction<boolean>>;
-  inputValue: string;
-  setCurrentCity: React.Dispatch<React.SetStateAction<ICity>>;
-  showInput: boolean;
-  handleShowInput: (value: boolean) => void;
-  handleShowGeoList: (value: boolean) => void;
-  showGeoList: boolean;
-}
-
-interface IGeolocation {
-  lat: number | null;
-  lon: number | null;
-}
-
-const Search: React.FC<SearchProps> = ({
+const Search: React.FC<ISearchProps> = ({
   showInput,
   inputValue,
   setCurrentCity,
@@ -132,8 +131,8 @@ const Search: React.FC<SearchProps> = ({
     handleShowGeoList(false);
   };
 
-  useOutsideAlerter(wrapperRef, showInput, handleClose);
-  useOutsideAlerter(wrapperRef, showGeoList, handleClose);
+  useOutsideClick(wrapperRef, showInput, handleClose);
+  useOutsideClick(wrapperRef, showGeoList, handleClose);
 
   const handleSetCityFromList = (city: ICity) => {
     setCurrentCity(city);

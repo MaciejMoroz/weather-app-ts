@@ -6,8 +6,7 @@ import GlobalStyle from 'theme/GlobalStyle';
 import { MainWrapper } from 'Templates/MainWrapper/MainWrapper';
 import { Container } from 'Templates/Container/Container';
 import Loader from 'Components/Loader/LoaderPrimary';
-// import Location from 'Components/Location/Location';
-import API from 'Helpers/API';
+// import API from 'Helpers/API';
 
 const Location = lazy(() => import('Components/Location/Location'));
 
@@ -26,7 +25,7 @@ const initialCity = {
   lon: 23.15,
 };
 
-function App() {
+const App: React.FC = () => {
   const [currentCity, setCurrentCity] = useState<ICity>(initialCity);
   return (
     <>
@@ -45,6 +44,6 @@ function App() {
       </ThemeProvider>
     </>
   );
-}
+};
 
 export default App;
